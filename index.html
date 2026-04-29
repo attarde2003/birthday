@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Leenu🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  background: linear-gradient(135deg,#ff758c,#ff7eb3);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* Sections */
+.section{
+  display:none;
+  min-height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:20px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s;
+}
+.section img{
+   position:relative;
+  width:420px;
+  height:420px;
+  margin-top:20px;
+  overflow:hidden;
+}
+.active{display:flex;opacity:1;transform:translateY(0);}
+
+/* Button */
+.btn{
+  padding:12px 28px;
+  margin-top:20px;
+  border:none;
+  background:white;
+  color:#ff4d6d;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+}
+.btn:hover{transform:scale(1.1);box-shadow:0 0 15px rgba(255,255,255,0.8);}
+
+/* Cartoon */
+.cartoon{width:260px;margin-top:20px;animation:float 3s infinite;}
+@keyframes float{50%{transform:translateY(-20px);}}
+
+/* Cake */
+.cake{font-size:90px;cursor:pointer;animation:bounce 1.5s infinite;}
+@keyframes bounce{50%{transform:translateY(-20px);}}
+
+/* Gallery */
+.gallery{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;}
+.gallery img{
+  width:450px;height:250px;border-radius:20px;
+  object-fit:cover;
+  opacity:0;
+  transform:scale(0.5);
+  transition:0.5s;
+}
+.gallery img.show{
+  opacity:1;
+  transform:scale(1);
+}
+.gallery img:hover{
+  transform:scale(1.1) rotate(2deg);
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Cards */
+.cards{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:20px;
+}
+.card{
+  width:180px;
+  height:180px;
+  perspective:1000px;
+  position:relative;
+  cursor:pointer;
+}
+.card div{
+  width:100%;
+  height:100%;
+  border-radius:15px;
+  position:absolute;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  backface-visibility:hidden;
+  transition:0.6s;
+  font-weight:bold;
+}
+.front{background:white;color:#ff4d6d;}
+.back{background:#ff4d6d;transform:rotateY(180deg);}
+.card.flip .front{transform:rotateY(180deg);}
+.card.flip .back{transform:rotateY(360deg);}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  color:red;
+  animation:floatUp 5s linear;
+}
+@keyframes floatUp{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+.popup-content{
+  background:white;
+  color:#ff4d6d;
+  padding:30px;
+  border-radius:20px;
+  width:500px;
+  animation:zoom 0.5s ease;
+}
+@keyframes zoom{
+  from{transform:scale(0.5);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+/* Typing */
+.typing{
+  border-right:2px solid #ff4d6d;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  width:10px;height:10px;
+  top:0;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(100vh) rotate(360deg);}
+}
+
+/* Responsive */
+@media(max-width:600px){
+  .gallery img{width:140px;height:140px;}
+}
+/* REAL CAKE SPLIT */
+.cake-container{
+  position:relative;
+  width:520px;
+  height:520px;
+  margin-top:20px;
+  overflow:hidden;
+}
+
+.cake-half{
+  position:absolute;
+  top:0;
+  width:50%;
+  height:100%;
+  overflow:hidden;
+  transition:0.6s ease;
+}
+
+.cake-half img{
+  width:220px;
+  height:220px;
+  object-fit:cover;
+}
+
+.left{left:0;}
+.left img{object-position:left;}
+
+.right{right:0;}
+.right img{object-position:right;}
+
+.knife{
+  position:absolute;
+  top:0;
+  left:-20px;
+  width:4px;
+  height:100%;
+  background:white;
+  box-shadow:0 0 10px white;
+  transition:0.5s ease;
+  z-index:5;
+}
+
+/* Cut animation */
+.cut .knife{left:110px;}
+.cut .left{transform:translateX(-25px) rotate(-6deg);}
+.cut .right{transform:translateX(25px) rotate(6deg);}
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
+
+<!-- SECTION 1 -->
+<div class="section active" id="start">
+  <h1>🎂 Happy Birthday My Fav Girl ❤️</h1>
+  <button class="btn" onclick="start()">Start</button>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section" id="cartoon">
+  <h2>You are special My Sweetu 😘</h2>
+  <!--<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2p1OXlkdXI5ZHl4MHI0M3hqdDlsc3psYW1ya2U2cDNrYnVkams1MCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MDJ9IbxxvDUQM/200.webp" class="cartoon">
+-->
+  <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGR1cHdwcDFrZjkwZXpjMTR6Z2Nmd2VucWRwdW9leGN2c2IwOTRtdSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qFmdpUKAFZ6rMobzzu/giphy.webp" class="cartoon">
+
+  <button class="btn" onclick="nextSection('cake')">Next</button>
+</div>
+<!-- SECTION 3 -->
+<div class="section" id="cake">
+  <h2>Sweet Sweet Cake for my Sweet Golu Molu🎂</h2>
+
+  <div class="cake-container" id="cakeBox">
+
+    <!-- Single Cake -->
+    <img src="https://media3.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3azY0ZWR5ZTFkYjcwNWc2cmxiaXhkMTVtZDZia3E0cngyZ2VrZHBvcyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wumLmqIVT4yDwsZiqD/giphy.webp" 
+         class="cake-img" id="cakeImg">
+
+    <!-- Knife -->
+    <div class="knife" id="knife"></div>
+
+    <!-- Cut Line Effect -->
+    <div class="cut-line" id="cutLine"></div>
+
+  </div>
+
+  <p id="cakeText"></p>
+
+  <button class="btn" onclick="nextSection('gallery')">Next</button>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section" id="gallery">
+  <h2>Our Memories 📸</h2>
+  <button class="btn" onclick="showPhotos()">Show Photos</button>
+  <div class="gallery">
+    <img src="image1.jpeg">
+    <img src="image2.jpeg">
+    <img src="image3.jpeg">
+    <img src="image4.jpeg">
+    <img src="image5.jpeg">
+  </div>
+  <button class="btn" onclick="nextSection('love')">Next</button>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section" id="love">
+  <h2>💖 Reasons Why You’re Special</h2>
+
+  <div class="cards">
+    <div class="card" onclick="this.classList.toggle('flip')">
+      <div class="front">Click 💕</div>
+      <div class="back">Your smile makes me Happy 😊</div>
+    </div>
+
+    <div class="card" onclick="this.classList.toggle('flip')">
+      <div class="front">Click 💕</div>
+      <div class="back">I Like Your Simplacity ✨</div>
+    </div>
+
+    <div class="card" onclick="this.classList.toggle('flip')">
+      <div class="front">Click 💕</div>
+      <div class="back">You are only Mine My Dear leenuu 💖</div>
+    </div>
+  </div>
+
+  
+
+  <button class="btn" onclick="showPopup()">Final Surprise 🎁</button>
+</div>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h2>🎁 Surprise 🎁</h2>
+    <p id="message" class="typing"></p>
+    <button class="btn" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<script>
+
+/* Start */
+function start(){
+  document.getElementById("music").play();
+  nextSection('cartoon');
+}
+
+/* Navigation */
+function nextSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  if(id==="love") startTimer();
+}
+
+/* Cake */
+/* Cake Swipe Cut */
+let startX = 0;
+const cakeBox = document.getElementById("cakeBox");
+
+cakeBox.addEventListener("mousedown", e => startX = e.clientX);
+cakeBox.addEventListener("mouseup", e => {
+  if(Math.abs(e.clientX - startX) > 50) cutCake();
+});
+
+cakeBox.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+cakeBox.addEventListener("touchend", e => {
+  if(Math.abs(e.changedTouches[0].clientX - startX) > 50) cutCake();
+});
+
+function cutCake(){
+  cakeBox.classList.add("cut");
+  document.getElementById("cakeText").innerText="🎉 Perfect Slice!";
+}
+
+/* Gallery */
+function showPhotos(){
+  const imgs=document.querySelectorAll(".gallery img");
+  imgs.forEach((img,i)=>{
+    setTimeout(()=>{
+      img.classList.add("show");
+    },i*300);
+  });
+}
+
+/* Timer */
+function startTimer(){
+  const startDate=new Date("2024-01-01"); // change date
+
+  setInterval(()=>{
+    let now=new Date();
+    let diff=now-startDate;
+
+    let days=Math.floor(diff/(1000*60*60*24));
+    let hours=Math.floor((diff/(1000*60*60))%24);
+
+    document.getElementById("timer").innerText=
+      `Together for ${days} days and ${hours} hours 💕`;
+  },1000);
+}
+
+/* Popup */
+function showPopup(){
+  document.getElementById("popup").style.display="flex";
+  typeText();
+  confetti();
+  heartExplosion();
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+}
+
+/* Typing */
+function typeText(){
+  const text="Happy Birthday My Dear Leenuu, My Sweet Mau🎂";
+  let i=0;
+  let msg=document.getElementById("message");
+  msg.innerHTML="";
+  let interval=setInterval(()=>{
+    msg.innerHTML+=text.charAt(i);
+    i++;
+    if(i>=text.length) clearInterval(interval);
+  },50);
+}
+
+/* Confetti */
+function confetti(){
+  for(let i=0;i<80;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=Math.random()*3+2+"s";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+
+/* Heart Explosion */
+function heartExplosion(){
+  for(let i=0;i<30;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left="50%";
+    h.style.top="50%";
+    h.style.transform=`translate(${Math.random()*400-200}px,${Math.random()*400-200}px)`;
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+
+/* Floating Hearts */
+setInterval(()=>{
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},400);
+
+</script>
+
+</body>
+</html>
